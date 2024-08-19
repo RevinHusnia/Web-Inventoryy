@@ -401,7 +401,7 @@ a{
 }
 
 /* Large screens (desktops, 1024px and up) */
-@media (min-width: 1024px) {
+@media (min-width: 1023px) {
     .sidebar {
         display: block;
     }
@@ -409,44 +409,23 @@ a{
         margin-left: 250px;
     }
     .header {
-        width: calc(96% - 250px); /* Adjust header width */
-    }
-    
-}
-
-/* Medium screens (tablets, 768px - 1023px) */
-@media (max-width: 1023px) {
-    .sidebar {
-        display: none;
-    }
-    .content {
-        margin-left: 0;
-    }
-    .form-container {
-        display: none;
-    }
-    .img-tr {
-        width: 100px;
-        height: 100px;
-    }
-    .header {
-        width: 94%;
+        width: calc( 97% - 250px); /* Adjust header width */
     }
     .table-container {
+        font-size: 12px;
         padding: 10px;
-        width: 96%;
+        width: calc( 96% - 27%); /* Sesuaikan lebar table-container menjadi 67% */
     }
-    .data-table th,
-    .data-table td {
-        padding: 10px;
-        font-size: 14px;
+    .form-container{
+        font-size: 10px;
+        width: 230px;
     }
-    .img-tr {
-        width: 150px;
-        height: 150px;
-    }
+    
 
 }
+
+
+
 
 /* Small screens (mobile devices, 767px and below) */
 @media (max-width: 768px) {
