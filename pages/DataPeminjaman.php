@@ -24,6 +24,7 @@ include '../partials/header.php';
         
         <div class="data-barang">
             <div class="table-container">
+            <button class="btn-edit" onclick="showPopup()">Tambah</button>
                 <h1>Data Peminjaman</h1>
                 <table class="data-table">
                     <thead>
@@ -43,53 +44,80 @@ include '../partials/header.php';
                             <td>10</td>
                           
                             <td><img class="img-tr" src="/assets/signing.png" alt=""></td>
-                            <td><button class="btn-delete">Delete</button></td>
+                            <td><button class="btn-delete">Delete</button> <button onclick="editPopup()" class="btn-edit">Edit</button></td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Barang 2</td>
-                            <td>15</td>
+              
                       
-                            <td><img class="img-tr" src="/assets/signing.png" alt=""></td>
-                            <td><button class="btn-delete">Delete</button></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Barang 3</td>
-                            <td>20</td>
-                          
-                            <td><img class="img-tr" src="/assets/signing.png" alt=""></td>
-                            <td><button class="btn-delete">Delete</button></td>
-                        </tr>
-                        <tr>
-
                     </tbody>
                 </table>
             </div>
-            <div class="form-container">
-                <h2>FORM PEMINJAMAN</h2>
-                <form>
-                    <label for="kode-barang">Kode Barang:</label>
-                    <input type="text" id="kode-barang" name="kode-barang">
+            <div id="popupForm" class="popup">
+    <div  class="popup-content">
+        <span class="closee" onclick="closePopup()">&times;</span>
+        <h2>Form Input</h2>
+        <form>
+        <label for="itemCode">Kode Barang:</label><br>
+        <input type="text" id="itemCode" name="itemCode" class="input-request"><br><br>
 
-                    <label for="nama-barang">Nama Barang:</label>
-                    <input type="text" id="nama-barang" name="nama-barang">
+        <label for="itemName">Nama Barang:</label><br>
+        <input type="text" id="itemName" name="itemName" class="input-request"><br><br>
 
-                    <label for="jumlah">Jumlah:</label>
-                    <input type="number" id="jumlah" name="jumlah">
+        <label for="itemQuantity">Jumlah:</label><br>
+        <input type="number" id="itemQuantity" name="itemQuantity" class="input-request"><br><br>
 
+        <label for="itemPhoto">Foto Barang:</label><br>
+        <input type="file" id="itemPhoto" name="itemPhoto" class="input-request" accept="image/*"><br><br>
 
-                    <label for="foto-input">Foto Input:</label>
-                    <input type="file" id="foto-input" name="foto-input">
-
-                    <button type="submit">Tambah</button>
-                </form>
-            </div>
+                    
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
         </div>
     </div>
     <div id="imageModal" class="modal">
         <span class="close">&times;</span>
         <img class="modal-content" id="modalImage">
     </div>
+
+    <script>
+    // Fungsi untuk menampilkan modal konfirmasi logout
+    document.getElementById('adminClickable').addEventListener('click', function() {
+        var result = confirm("Apakah Anda yakin ingin logout?");
+        if (result) {
+            // Jika pengguna menekan "OK"
+            alert("Logout berhasil!");
+            // Aksi logout bisa ditambahkan di sini, seperti redirect ke halaman login
+            window.location.href = '/Login.php';
+        } else {
+            // Jika pengguna menekan "Cancel"
+            alert("Logout dibatalkan.");
+        }
+    });
+
+    // Menutup modal gambar saat diklik
+    document.getElementsByClassName("close")[0].onclick = function() {
+        document.getElementById("imageModal").style.display = "none";
+    }
+    function showPopup() {
+    document.getElementById("popupForm").style.display = "block";
+}
+
+// Fungsi untuk menutup popup
+function closePopup() {
+    document.getElementById("popupForm").style.display = "none";
+}
+
+function editPopup() {
+        document.getElementById("popupForm").style.display = "block";
+    }
+
+    // Fungsi untuk menutup popup
+    function closePopup() {
+        document.getElementById("popupForm").style.display = "none";
+    }
+
+
+</script>
 
     <?php include '../partials/footer.php'; ?>

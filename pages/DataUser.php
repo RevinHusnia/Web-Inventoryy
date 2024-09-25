@@ -5,27 +5,28 @@ include '../partials/header.php';
 ?>
     
     <div class="form-overlay" id="formOverlay"></div>
-    <div class="content">
-        <div class="header">
-            <div class="user-info" id="userInfo">
-                <div class="admin-clickable">
-                    <img src="/assets/user.png" alt="Admin" class="admin-img">
-                    <span class="admin-text">admin ▼</span>
-                </div>
-            </div>
-
-            <!-- Popup Konfirmasi Logout -->
-            <div id="logoutModal" class="modal">
-                <div class="modal-content">
-                    <p>Apakah Anda ingin logout?</p>
-                    <button id="confirmLogout" class="btn-confirm">Yes</button>
-                    <button id="cancelLogout" class="btn-cancel">No</button>
-                </div>
+<div class="content">
+    <div class="header">
+        <div class="user-info" id="userInfo">
+            <div class="admin-clickable" id="adminClickable">
+                <img src="/assets/user.png" alt="Admin" class="admin-img">
+                <span class="admin-text">admin ▼</span>
             </div>
         </div>
-        
-        <div class="data-barang">
+
+        <!-- Popup Konfirmasi Logout -->
+        <div id="logoutModal" style="display: none;">
+            <div>
+                <p>Apakah Anda ingin logout?</p>
+                <button id="confirmLogout">Yes</button>
+                <button id="cancelLogout">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="data-barang">
             <div class="table-container">
+            <button class="btn-edit" onclick="showPopup()">Tambah</button>
                 <h1>Data User</h1>
                 <table class="data-table">
                     <thead>
@@ -44,7 +45,7 @@ include '../partials/header.php';
                             
       
                             <td><img class="img-tr" src="/assets/user.png" alt=""></td>
-                            <td><button class="btn-delete">Delete</button></td>
+                            <td><button class="btn-delete">Delete</button> <button onclick="editPopup()" class="btn-edit">Edit</button></td>
                         </tr>
                         <tr>
                             <td>Danar</td>
@@ -52,7 +53,7 @@ include '../partials/header.php';
                            
                             
                             <td><img class="img-tr" src="/assets/user.png" alt=""></td>
-                            <td><button class="btn-delete">Delete</button></td>
+                            <td><button class="btn-delete">Delete</button> <button onclick="editPopup()" class="btn-edit">Edit</button></td>
                         </tr>
                         <tr>
                             <td>psy</td>
@@ -60,31 +61,77 @@ include '../partials/header.php';
                             
                            
                             <td><img class="img-tr" src="/assets/user.png" alt=""></td>
-                            <td><button class="btn-delete">Delete</button></td>
+                            <td><button class="btn-delete">Delete</button> <button onclick="editPopup()" class="btn-edit">Edit</button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="form-container">
-                <h2>FORM USER</h2>
-                <form>
-                    <label for="kode-barang">Nama User:</label>
-                    <input type="text" id="kode-barang" name="kode-barang">
+            <div id="popupForm" class="popup">
+    <div  class="popup-content">
+        <span class="closee" onclick="closePopup()">&times;</span>
+        <h2>Form Input</h2>
 
-                    <label for="nama-barang">Nomor Telephone:</label>
-                    <input type="text" id="nama-barang" name="nama-barang">
 
-                    <label for="foto-input">Foto Input:</label>
-                    <input type="file" id="foto-input" name="foto-input">
+        <form action="../control/process_form.php" method="POST" enctype="multipart/form-data">
+    <label for="itemCode">Nama:</label><br>
+    <input type="text" id="itemCode" name="itemCode" class="input-request" required><br><br>
 
-                    <button type="submit">Tambah</button>
-                </form>
-            </div>
+    <label for="itemName">Nomor Telp:</label><br>
+    <input type="text" id="itemName" name="itemName" class="input-request" required><br><br>
+
+    <label for="itemPhoto">Foto User:</label><br>
+    <input type="file" id="itemPhoto" name="itemPhoto" class="input-request" accept="image/*" required><br><br>
+
+    <button type="submit">Submit</button>
+</form>
+
+
+    </div>
+</div>
         </div>
     </div>
     <div id="imageModal" class="modal">
         <span class="close">&times;</span>
         <img class="modal-content" id="modalImage">
     </div>
+
+    <script>
+    // Fungsi untuk menampilkan modal konfirmasi logout
+    document.getElementById('adminClickable').addEventListener('click', function() {
+        var result = confirm("Apakah Anda yakin ingin logout?");
+        if (result) {
+            // Jika pengguna menekan "OK"
+            alert("Logout berhasil!");
+            // Aksi logout bisa ditambahkan di sini, seperti redirect ke halaman login
+            window.location.href = '/Login.php';
+        } else {
+            // Jika pengguna menekan "Cancel"
+            alert("Logout dibatalkan.");
+        }
+    });
+
+    // Menutup modal gambar saat diklik
+    document.getElementsByClassName("close")[0].onclick = function() {
+        document.getElementById("imageModal").style.display = "none";
+    }
+    function showPopup() {
+    document.getElementById("popupForm").style.display = "block";
+}
+
+// Fungsi untuk menutup popup
+function closePopup() {
+    document.getElementById("popupForm").style.display = "none";
+}
+
+function editPopup() {
+        document.getElementById("popupForm").style.display = "block";
+    }
+
+    // Fungsi untuk menutup popup
+    function closePopup() {
+        document.getElementById("popupForm").style.display = "none";
+    }
+
+</script>
 
     <?php include '../partials/footer.php' ?>
